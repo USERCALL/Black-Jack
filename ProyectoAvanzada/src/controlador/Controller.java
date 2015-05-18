@@ -3,11 +3,11 @@ package controlador;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.print.attribute.standard.PDLOverrideSupported;
 import javax.swing.JOptionPane;
 
 import logica.DesicionMaquina;
 import logica.JuezJugo;
+import vista.Archivos;
 import vista.VentanaDeJuego;
 
 public class Controller implements ActionListener
@@ -16,7 +16,7 @@ public class Controller implements ActionListener
 		int cartasSolicitdas = 0;
 		private VentanaDeJuego vista;
 		private int partidasGanadasMaquina;
-		private int partidasGanadasJugador;
+		private int partidasGanadasHumano;
 
 		DesicionMaquina maquina = new DesicionMaquina();
 		JuezJugo juez = new JuezJugo();
@@ -27,7 +27,7 @@ public class Controller implements ActionListener
 				this.setVista(vista);
 
 				partidasGanadasMaquina = 0;
-				partidasGanadasJugador = 0;
+				partidasGanadasHumano = 0;
 
 				añadirActionListenerMenubar();
 				añadirActionListenerJugador();
@@ -39,6 +39,7 @@ public class Controller implements ActionListener
 				/* menu bar numero uno */
 				getVista().getMntmEmpezar().addActionListener(this);
 				getVista().getMntmReInciar().addActionListener(this);
+				getVista().getMntmAbrir().addActionListener(this);
 				getVista().getMntmGuardar().addActionListener(this);
 				getVista().getMntmSalir().addActionListener(this);
 				/* segundo menu bar */
@@ -77,6 +78,22 @@ public class Controller implements ActionListener
 					{
 						btnQuedarse();
 					}
+				if (e.getSource() == getVista().getMntmAbrir())
+					{
+					Archivos archivo =new Archivos(); 
+						String[] puntuacion = archivo.abrirArchivo();
+					partidasGanadasHumano=Integer.parseInt(puntuacion[0]); 
+					partidasGanadasMaquina=Integer.parseInt(puntuacion[1]);
+					
+					getVista().getLblPuntuacionUsuarioValor().setText(puntuacion[0]); 
+					getVista().getLblPuntuacionMaquinaValor().setText(puntuacion[1]); 
+					
+					}
+				if (e.getSource() == getVista().getMntmGuardar())
+					{
+						String info= Integer.toString(partidasGanadasHumano)+","+Integer.toString(partidasGanadasHumano); 
+						new Archivos().guardarArchivo( info);
+					}
 
 			}
 
@@ -110,12 +127,12 @@ public class Controller implements ActionListener
 
 				if (juez.isHumanoGanado(puntajeHumano, puntajeMaquina))
 					{
-						partidasGanadasJugador++;
+						partidasGanadasHumano++;
 						JOptionPane.showMessageDialog(null, "le has ganado con [" + puntajeHumano + "] puntos contra ["
 								+ puntajeMaquina + "] puntos de la maquina   \nSe reiniciara", "Perdio",
 								JOptionPane.YES_OPTION);
 						getVista().getLblPuntuacionUsuarioValor().setText(
-								(Integer.toString(partidasGanadasJugador) + "]"));;
+								(Integer.toString(partidasGanadasHumano) + "]"));;
 					} else
 					{
 						partidasGanadasMaquina++;
@@ -131,4 +148,6 @@ public class Controller implements ActionListener
 				getVista().getPaneJuego().getPaneMaquina().limpiar();
 
 			}
+	
+	
 	}

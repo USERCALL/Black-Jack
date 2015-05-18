@@ -19,6 +19,7 @@ public class VentanaDeJuego extends JFrame
 		private static final long serialVersionUID = 1L;
 		private JMenuItem mntmEmpezar;
 		private JMenuItem mntmReInciar;
+		private JMenuItem mntmAbrir;
 		private JMenuItem mntmGuardar;
 		private JMenuItem mntmSalir;
 		private JMenuItem mntmComoJugar;
@@ -26,10 +27,10 @@ public class VentanaDeJuego extends JFrame
 		private JButton btnPedir;
 		private JButton btnQuedarse;
 
-		private panelJuego paneJuego; 
+		private panelJuego paneJuego;
 		private JLabel lblPuntuacionMaquinaValor;
 		private JLabel lblPuntuacionUsuarioValor;
-		
+
 		public VentanaDeJuego()
 			{
 				/* informacion basica */
@@ -42,8 +43,8 @@ public class VentanaDeJuego extends JFrame
 				createMenuBar();
 				createPaneJuego();
 				createBortones();
-				
-				getContentPane().add(paneJuego, BorderLayout.CENTER); 
+
+				getContentPane().add(paneJuego, BorderLayout.CENTER);
 
 				setBounds(0, 0, 700, 700);
 				setLocationRelativeTo(null);
@@ -51,7 +52,6 @@ public class VentanaDeJuego extends JFrame
 				setVisible(true);
 
 			}
-		
 
 		private void createMenuBar()
 			{
@@ -69,6 +69,9 @@ public class VentanaDeJuego extends JFrame
 				mntmReInciar = new JMenuItem("Re Inciar");
 				mnJuego.add(mntmReInciar);
 
+				mntmAbrir = new JMenuItem("Abrir");
+				mnJuego.add(mntmAbrir);
+
 				mntmGuardar = new JMenuItem("Guardar");
 				mnJuego.add(mntmGuardar);
 
@@ -79,7 +82,7 @@ public class VentanaDeJuego extends JFrame
 
 				JMenu mnInformacion = new JMenu("Informacion");
 				menuBar.add(mnInformacion);
-				
+
 				mntmComoJugar = new JMenuItem("Como jugar");
 				mnInformacion.add(mntmComoJugar);
 
@@ -87,30 +90,31 @@ public class VentanaDeJuego extends JFrame
 				mnInformacion.add(mntmAcerca);
 			}
 
-		private void createPaneJuego(){
-			paneJuego =new panelJuego(); 
-		}
-		
-		
-		private void createPanelPuntuacion(){
-			JPanel panelPuntuacion = new JPanel(new FlowLayout());
-			getContentPane().add(panelPuntuacion, BorderLayout.NORTH);
-			
-			panelPuntuacion.setBorder(new TitledBorder("Puntuacion"));
-			
-			JLabel lblPuntuacionMaquina = new JLabel("[Maquina:"); 
-			panelPuntuacion.add(lblPuntuacionMaquina);
-			
-			lblPuntuacionMaquinaValor = new JLabel(" No se a empezado]"); 
-			panelPuntuacion.add(lblPuntuacionMaquinaValor);
-			
-			JLabel lblPuntuacionUsuario = new JLabel("[Usuario:"); 
-			panelPuntuacion.add(lblPuntuacionUsuario);
-			
-			lblPuntuacionUsuarioValor = new JLabel(" No se a empezado]"); 
-			panelPuntuacion.add(lblPuntuacionUsuarioValor);
-			
-		}
+		private void createPaneJuego()
+			{
+				paneJuego = new panelJuego();
+			}
+
+		private void createPanelPuntuacion()
+			{
+				JPanel panelPuntuacion = new JPanel(new FlowLayout());
+				getContentPane().add(panelPuntuacion, BorderLayout.NORTH);
+
+				panelPuntuacion.setBorder(new TitledBorder("Puntuacion"));
+
+				JLabel lblPuntuacionMaquina = new JLabel("[Maquina:");
+				panelPuntuacion.add(lblPuntuacionMaquina);
+
+				lblPuntuacionMaquinaValor = new JLabel(" No se a empezado]");
+				panelPuntuacion.add(lblPuntuacionMaquinaValor);
+
+				JLabel lblPuntuacionUsuario = new JLabel("[Usuario:");
+				panelPuntuacion.add(lblPuntuacionUsuario);
+
+				lblPuntuacionUsuarioValor = new JLabel(" No se a empezado]");
+				panelPuntuacion.add(lblPuntuacionUsuarioValor);
+
+			}
 
 		private void createBortones()
 			{
@@ -127,66 +131,61 @@ public class VentanaDeJuego extends JFrame
 
 			}
 
-/*getter and setter*/
+		/* getter and setter */
 		public JMenuItem getMntmEmpezar()
 			{
 				return mntmEmpezar;
 			}
-
 
 		public JMenuItem getMntmReInciar()
 			{
 				return mntmReInciar;
 			}
 
+		public JMenuItem getMntmAbrir()
+			{
+				return mntmAbrir;
+			}
 
 		public JMenuItem getMntmGuardar()
 			{
 				return mntmGuardar;
 			}
 
-
 		public JMenuItem getMntmSalir()
 			{
 				return mntmSalir;
 			}
-
 
 		public JMenuItem getMntmComoJugar()
 			{
 				return mntmComoJugar;
 			}
 
-
 		public JMenuItem getMntmAcerca()
 			{
 				return mntmAcerca;
 			}
-
 
 		public JButton getBtnPedir()
 			{
 				return btnPedir;
 			}
 
-
 		public JButton getBtnQuedarse()
 			{
 				return btnQuedarse;
 			}
-
 
 		public panelJuego getPaneJuego()
 			{
 				return paneJuego;
 			}
 
-
 		public JLabel getLblPuntuacionMaquinaValor()
 			{
 				return lblPuntuacionMaquinaValor;
 			}
-
 
 		public JLabel getLblPuntuacionUsuarioValor()
 			{
