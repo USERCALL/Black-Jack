@@ -3,7 +3,11 @@ package controlador;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import vista.Carta;
+import javax.print.attribute.standard.PDLOverrideSupported;
+import javax.swing.JOptionPane;
+
+import logica.DesicionMaquina;
+import logica.JuezJugo;
 import vista.VentanaDeJuego;
 
 public class Controller implements ActionListener
@@ -11,11 +15,20 @@ public class Controller implements ActionListener
 
 		int cartasSolicitdas = 0;
 		private VentanaDeJuego vista;
+		private int partidasGanadasMaquina;
+		private int partidasGanadasJugador;
+
+		DesicionMaquina maquina = new DesicionMaquina();
+		JuezJugo juez = new JuezJugo();
 
 		public Controller(VentanaDeJuego vista)
 
 			{
 				this.setVista(vista);
+
+				partidasGanadasMaquina = 0;
+				partidasGanadasJugador = 0;
+
 				añadirActionListenerMenubar();
 				añadirActionListenerJugador();
 			}
@@ -58,14 +71,64 @@ public class Controller implements ActionListener
 			{
 				if (e.getSource() == getVista().getBtnPedir())
 					{
-
-						getVista().getPaneJuego().getPaneHumano().mostrarCartas();
-				
+						btnPedrCarta();
 					}
 				if (e.getSource() == getVista().getBtnQuedarse())
 					{
-			
+						btnQuedarse();
+					}
+
+			}
+
+		private void btnPedrCarta()
+			{
+				getVista().getPaneJuego().getPaneHumano().solicitarCartas();
+
+				if (true == juez.perdio(getVista().getPaneJuego().getPaneHumano().getArrayCartas()))
+					{
+						partidasGanadasMaquina++;
+						getVista().getLblPuntuacionMaquinaValor().setText(
+								Integer.toString(partidasGanadasMaquina) + "]");
+						JOptionPane.showMessageDialog(null, "Has superado los 21 puntos \nSe reiniciara", "Perdio",
+								JOptionPane.YES_OPTION);
+
+						getVista().getPaneJuego().getPaneHumano().limpiar();
 					}
 			}
 
+		private void btnQuedarse()
+			{
+
+				do
+					{
+						getVista().getPaneJuego().getPaneMaquina().solicitarCartas();
+					} while (true == maquina.maquinaPideCarta(getVista().getPaneJuego().getPaneMaquina()
+						.getArrayCartas()));;
+
+				int puntajeHumano = juez.puntajeJugador(getVista().getPaneJuego().getPaneHumano().getArrayCartas());
+				int puntajeMaquina = juez.puntajeJugador(getVista().getPaneJuego().getPaneMaquina().getArrayCartas());
+
+				if (juez.isHumanoGanado(puntajeHumano, puntajeMaquina))
+					{
+						partidasGanadasJugador++;
+						JOptionPane.showMessageDialog(null, "le has ganado con [" + puntajeHumano + "] puntos contra ["
+								+ puntajeMaquina + "] puntos de la maquina   \nSe reiniciara", "Perdio",
+								JOptionPane.YES_OPTION);
+						getVista().getLblPuntuacionUsuarioValor().setText(
+								(Integer.toString(partidasGanadasJugador) + "]"));;
+					} else
+					{
+						partidasGanadasMaquina++;
+
+						JOptionPane.showMessageDialog(null, "Te ha ganado la maquina con [" + puntajeMaquina
+								+ "] puntos contra [" + puntajeHumano + "] puntos tuyos  \nSe reiniciara", "Perdio",
+								JOptionPane.YES_OPTION);
+						getVista().getLblPuntuacionMaquinaValor().setText(
+								Integer.toString(partidasGanadasMaquina) + "]");
+
+					}
+				getVista().getPaneJuego().getPaneHumano().limpiar();
+				getVista().getPaneJuego().getPaneMaquina().limpiar();
+
+			}
 	}

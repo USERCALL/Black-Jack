@@ -4,8 +4,11 @@ import java.awt.FlowLayout;
 import java.util.ArrayList;
 import java.util.Random;
 
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
+
+import logica.JuezJugo;
 
 public class PanelJugador extends JPanel
 	{
@@ -26,15 +29,14 @@ public class PanelJugador extends JPanel
 
 			}
 
-		public void mostrarCartas()
+		public void solicitarCartas()
 			{
 
-				Random rnd = new Random();
+				int v = GenerarAleatorio();
 
-				System.out.println("Primera secuencia.");
-				System.out.println((rnd.nextInt(13) + 1));
+				System.out.println("valor de carta" + v);
 
-				carta1 = new Carta(Integer.toString(GenerarAleatorio()), Carta.PICA);
+				carta1 = new Carta(Integer.toString(v), Carta.PICA);
 				add(carta1);
 				arrayCarta.add(carta1);
 				updateUI();
@@ -49,5 +51,27 @@ public class PanelJugador extends JPanel
 				Dado = Aleatorio.nextInt(13) + 1;
 				return Dado;
 			}
+		
+		
+		public void limpiar(){
+			
+			arrayCarta.clear(); 
+			/*remuelve  lo del pane*/
+			this.removeAll();
+			
+			/*repinta las cosas del panel*/
+			updateUI();
+			
+			
+		}
+		
+		
+		public ArrayList<Carta> getArrayCartas(){
+			
+			return arrayCarta; 
+		}
+		
+		
+		
 
 	}
