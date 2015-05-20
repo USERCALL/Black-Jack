@@ -1,8 +1,5 @@
 package vista;
 
-
-
-
 import java.awt.Graphics;
 import java.awt.Image;
 
@@ -16,19 +13,21 @@ public class panelJuego extends JPanel
 		private static final long serialVersionUID = 1L;
 		private PanelJugador paneMaquina;
 		private PanelJugador paneHumano;
-		//private Image imagen;
+
+		// private Image imagen;
 
 		public panelJuego()
 			{
 
 				setBounds(0, 0, 300, 300);
 				setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-				
+
 				createPanelMaquina();
 				createPanelHumano();
-				
+
 			}
-/*creacion de paneles*/
+
+		/* creacion de paneles */
 		private void createPanelMaquina()
 			{
 				paneMaquina = new PanelJugador("Maquina");
@@ -42,7 +41,8 @@ public class panelJuego extends JPanel
 				paneHumano = new PanelJugador("Humano");
 				add(paneHumano);
 			}
-/*getter*/
+
+		/* getter */
 		public PanelJugador getPaneMaquina()
 			{
 				return paneMaquina;
@@ -53,22 +53,21 @@ public class panelJuego extends JPanel
 				return paneHumano;
 			}
 
-	
 		Image imagen;
-		  protected void paintComponent(Graphics g) {
 
-			  try { imagen = new
-						ImageIcon(getClass().getResource("/panio.jpg")).getImage(); } catch
-						 (NullPointerException e) { System.out.println("Error no se craga imagen"); }
-						 
-						 g.drawImage(imagen, 0, 0, getWidth(), getHeight(), this); //renderiza
-				
-			
-			    }
-		
+		protected void paintComponent(Graphics g)
+			{
 
-	
-		
-		
+				try
+					{
+						imagen = new ImageIcon(getClass().getResource("/panio10.jpg")).getImage();
+					} catch (NullPointerException e)
+					{
+						System.out.println("Error no se craga imagen");
+					}
+
+				g.drawImage(imagen, 0, 0, getWidth(), getHeight(), this); // renderiza
+
+			}
 
 	}

@@ -3,6 +3,8 @@ package vista;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -25,7 +27,6 @@ public class PanelJugador extends JPanel
 				setBorder(new TitledBorder(jugador));
 				setLayout(new FlowLayout());
 				setOpaque(false);
-				
 
 				arrayCarta = new ArrayList<Carta>();
 
@@ -34,24 +35,71 @@ public class PanelJugador extends JPanel
 		public void solicitarCartas()
 			{
 
-				int v = GenerarAleatorio();
+				int valorCarta = generarValorAleatorio();
 
-				System.out.println("valor de carta" + v);
+				System.out.println("valor de carta" + valorCarta);
 
-				carta1 = new Carta(Integer.toString(v), Carta.PICA);
+				carta1 = new Carta(Integer.toString(valorCarta), generarPaloAleatorio());
 				add(carta1);
 				arrayCarta.add(carta1);
 				updateUI();
 
 			}
 
-		private int GenerarAleatorio()
+		private String generarPaloAleatorio()
 			{
-				Random Aleatorio = new Random();
-				int Dado;
+				int rdnInt = 0;
+				String  palo =""; 
+				try
+					{
+						SecureRandom number = SecureRandom.getInstance("SHA1PRNG");
+						// Generate 20 integers 0..20
 
-				Dado = Aleatorio.nextInt(13) + 1;
-				return Dado;
+						rdnInt = number.nextInt(3);
+						rdnInt++;
+					} catch (NoSuchAlgorithmException nsae)
+					{
+						// Forward to handler
+					}
+
+				if (1 == rdnInt)
+					{
+						palo = Carta.CORAZON;
+					}
+				if (2 == rdnInt)
+					{
+						palo = Carta.TREBOL;
+					}
+				if (3 == rdnInt)
+					{
+						palo = Carta.DIAMANTE;
+					}
+				if (4 == rdnInt)
+					{
+						palo = Carta.PICA;
+					}
+
+				return palo;
+
+			}
+
+		private int generarValorAleatorio()
+			{
+
+				int rdnInt = 0;
+				try
+					{
+						SecureRandom number = SecureRandom.getInstance("SHA1PRNG");
+						// Generate 20 integers 0..20
+
+						rdnInt = number.nextInt(12);
+						rdnInt++;
+					} catch (NoSuchAlgorithmException nsae)
+					{
+						// Forward to handler
+					}
+
+				return rdnInt;
 			}
 
 		public void limpiar()
@@ -62,10 +110,9 @@ public class PanelJugador extends JPanel
 				this.removeAll();
 
 				/* repinta las cosas del panel */
-				
+
 				repaint();
 				updateUI();
-				
 
 			}
 
@@ -74,5 +121,5 @@ public class PanelJugador extends JPanel
 
 				return arrayCarta;
 			}
-	
+
 	}
