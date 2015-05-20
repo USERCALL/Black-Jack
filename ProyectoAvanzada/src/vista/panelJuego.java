@@ -53,20 +53,22 @@ public class panelJuego extends JPanel
 				return paneHumano;
 			}
 
-		/*
+	
 		Image imagen;
+		  protected void paintComponent(Graphics g) {
+
+			  try { imagen = new
+						ImageIcon(getClass().getResource("/panio.jpg")).getImage(); } catch
+						 (NullPointerException e) { System.out.println("Error no se craga imagen"); }
+						 
+						 g.drawImage(imagen, 0, 0, getWidth(), getHeight(), this); //renderiza
+				
+			
+			    }
 		
-		 @Override
+
+	
 		
-		 public void paint(Graphics g) {
 		
-		try { imagen = new
-		ImageIcon(getClass().getResource("/panio.jpg")).getImage(); } catch
-		 (NullPointerException e) { System.out.println("Error"); }
-		 
-		 g.drawImage(imagen, 0, 0, getWidth(), getHeight(), this); //renderiza
-		 }
-		
-	*/
 
 	}

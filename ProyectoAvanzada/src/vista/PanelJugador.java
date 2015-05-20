@@ -1,14 +1,14 @@
 package vista;
 
 import java.awt.FlowLayout;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.util.ArrayList;
 import java.util.Random;
 
-import javax.swing.JOptionPane;
+import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
-
-import logica.JuezJugo;
 
 public class PanelJugador extends JPanel
 	{
@@ -24,6 +24,8 @@ public class PanelJugador extends JPanel
 
 				setBorder(new TitledBorder(jugador));
 				setLayout(new FlowLayout());
+				setOpaque(false);
+				
 
 				arrayCarta = new ArrayList<Carta>();
 
@@ -51,27 +53,26 @@ public class PanelJugador extends JPanel
 				Dado = Aleatorio.nextInt(13) + 1;
 				return Dado;
 			}
-		
-		
-		public void limpiar(){
-			
-			arrayCarta.clear(); 
-			/*remuelve  lo del pane*/
-			this.removeAll();
-			
-			/*repinta las cosas del panel*/
-			updateUI();
-			
-			
-		}
-		
-		
-		public ArrayList<Carta> getArrayCartas(){
-			
-			return arrayCarta; 
-		}
-		
-		
-		
 
+		public void limpiar()
+			{
+
+				arrayCarta.clear();
+				/* remuelve lo del pane */
+				this.removeAll();
+
+				/* repinta las cosas del panel */
+				
+				repaint();
+				updateUI();
+				
+
+			}
+
+		public ArrayList<Carta> getArrayCartas()
+			{
+
+				return arrayCarta;
+			}
+	
 	}

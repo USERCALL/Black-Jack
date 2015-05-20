@@ -70,6 +70,15 @@ public class Controller implements ActionListener
 		@Override
 		public void actionPerformed(ActionEvent e)
 			{
+				if (e.getSource() == getVista().getMntmReInciar())
+					{
+						btnMntmReInciar(); 
+					}	
+				
+				
+				
+				
+				
 				if (e.getSource() == getVista().getBtnPedir())
 					{
 						btnPedrCarta();
@@ -80,24 +89,66 @@ public class Controller implements ActionListener
 					}
 				if (e.getSource() == getVista().getMntmAbrir())
 					{
-					Archivos archivo =new Archivos(); 
-						String[] puntuacion = archivo.abrirArchivo();
-					partidasGanadasHumano=Integer.parseInt(puntuacion[0]); 
-					partidasGanadasMaquina=Integer.parseInt(puntuacion[1]);
-					
-					getVista().getLblPuntuacionUsuarioValor().setText(puntuacion[0]); 
-					getVista().getLblPuntuacionMaquinaValor().setText(puntuacion[1]); 
-					
+						btnMntmAbrir();
 					}
 				if (e.getSource() == getVista().getMntmGuardar())
 					{
-						String info= Integer.toString(partidasGanadasHumano)+","+Integer.toString(partidasGanadasHumano); 
-						new Archivos().guardarArchivo( info);
+						btnMntmGuardar();
+					}
+				if (e.getSource() == getVista().getMntmSalir())
+					{
+						btnMntmSalir();
+					}
+				if (e.getSource() == getVista().getMntmAcerca())
+					{
+						btnMntmAcerca();
+					}
+				if (e.getSource() == getVista().getMntmComoJugar())
+					{
+						btnMntmComoJugar();
 					}
 
 			}
 
-		private void btnPedrCarta()
+		private void btnMntmComoJugar()
+			{
+				JOptionPane.showMessageDialog(null, 
+						"Selecciona Primero Pedir Carta y presiona quedarse para que \n"
+						+ "la maquina destape sus cartas recurda la idea del juego es \n "
+						+ "tener una puntuacion de 21 Sdsin excederse \n"
+						+ "[si la maquina iguala tu puntaje esta ganara por reglas del juego] ");
+				
+				
+			}
+
+		private void btnMntmAcerca()
+			{
+			JOptionPane.showMessageDialog(null, "Juego elaborado por USERCALL año 2015 \nBajo licencia GPL3.0 \nSofware lLibre para una sociedad Libre ");
+			
+			}
+		
+		private void btnMntmReInciar()
+			{
+				
+				partidasGanadasMaquina=0; 
+				partidasGanadasHumano=0; 
+				
+				getVista().getPaneJuego().getPaneMaquina().limpiar();
+				getVista().getPaneJuego().getPaneHumano().limpiar();
+				
+				getVista().getLblPuntuacionMaquinaValor().setText("Se Reinicio");
+				getVista().getLblPuntuacionUsuarioValor().setText("Se Reinicio");
+				
+			}
+
+		private void btnMntmSalir()
+			{
+				System.exit(0)
+				;
+				
+			}
+		
+        private void btnPedrCarta()
 			{
 				getVista().getPaneJuego().getPaneHumano().solicitarCartas();
 
@@ -148,6 +199,23 @@ public class Controller implements ActionListener
 				getVista().getPaneJuego().getPaneMaquina().limpiar();
 
 			}
-	
-	
+
+		private void btnMntmGuardar()
+			{
+				String info = Integer.toString(partidasGanadasHumano) + "," + Integer.toString(partidasGanadasHumano);
+				new Archivos().guardarArchivo(info);
+			}
+
+		private void btnMntmAbrir()
+			{
+				Archivos archivo = new Archivos();
+				String[] puntuacion = archivo.abrirArchivo();
+				partidasGanadasHumano = Integer.parseInt(puntuacion[0]);
+				partidasGanadasMaquina = Integer.parseInt(puntuacion[1]);
+
+				getVista().getLblPuntuacionUsuarioValor().setText(puntuacion[0]);
+				getVista().getLblPuntuacionMaquinaValor().setText(puntuacion[1]);
+
+			}
+
 	}
