@@ -1,14 +1,9 @@
 package vista;
 
 import java.awt.FlowLayout;
-import java.awt.Graphics;
-import java.awt.Image;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.ArrayList;
-import java.util.Random;
-
-import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 

@@ -35,11 +35,17 @@ public class JuezJugo
 		public boolean isHumanoGanado(int puntaJeHumano,int puntajeMaquina)
 			{
 				boolean ganador = false;
+
 				if (puntajeMaquina < puntaJeHumano)
 					{
-						ganador=  true;
+						ganador = true;
 					}
-				return ganador; 
+
+				if (21 < puntajeMaquina)
+					{
+						ganador = true;
+					}
+				return ganador;
 			}
 
 		public int puntajeJugador(ArrayList<Carta> maso)

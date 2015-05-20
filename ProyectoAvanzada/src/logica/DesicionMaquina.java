@@ -23,7 +23,7 @@ public class DesicionMaquina
 						puntaje = puntaje + valorCarta;
 					}
 
-				if (12 <= puntaje)
+				if (17 <= puntaje)
 					{
 						pedir = false;
 					}
